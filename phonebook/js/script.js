@@ -28,7 +28,7 @@ const data = [
     const container = document.createElement('div');
     container.classList.add('container');
     return container;
-  }
+  };
 
   const createHeader = () => {
     const header = document.createElement('header');
@@ -39,15 +39,15 @@ const data = [
 
     header.headerContainer = headerContainer;
     return header;
-  }
+  };
 
-  const createLogo = title => {  // Соответственно это функция которая создает элемент! Для дальнейшей работы которой мы создаем новую переменную в остновной функции!
-    const h1 = document.createElement('h1'); //Создаем новый элемент!
-    h1.classList.add('logo');  // Присваиваем этому элементу класс!
-    h1.textContent = `Телефонный справочник. ${title}` // Добавляем классу текст!
+  const createLogo = title => { // Соответственно это функция которая создает элемент! Для дальнейшей работы которой мы создаем новую переменную в остновной функции!
+    const h1 = document.createElement('h1'); // Создаем новый элемент!
+    h1.classList.add('logo'); // Присваиваем этому элементу класс!
+    h1.textContent = `Телефонный справочник. ${title}`; // Добавляем классу текст!
 
     return h1;
-  }
+  };
 
   const createMain = () => {
     const main = document.createElement('main'); // Создаем элемент main!
@@ -56,7 +56,7 @@ const data = [
     main.append(mainContainer); // Аппендим контейнер для main!
     main.mainContainer = mainContainer; // Свойство аозволяющее добавлять в этот контейнер элементы как и хедер!
     return main;
-  }
+  };
 
   const createFooter = () => {
     const footer = document.createElement('footer');
@@ -67,28 +67,27 @@ const data = [
 
     footer.footerContainer = footerContainer;
     return footer;
-  }
+  };
 
 
-    const author = document.createElement('p')
-    author.classList.add('author')
-    author.textContent = `Все права защищены ©Егор`;
+  const author = document.createElement('p');
+  author.classList.add('author');
+  author.textContent = `Все права защищены ©Егор`;
 
 
-
-  const createButtonsGroup = params => {  // Функция создания кнопок которая принимает в сябя параметры, params это массив
+  const createButtonsGroup = params => { // Функция создания кнопок которая принимает в сябя параметры, params это массив
     // и мы можем решить для себя сколько кнопок создавать одну или несколько!
     const btnWrapper = document.createElement('div');
     btnWrapper.classList.add('btn-wrapper');
 
-    const btns = params.map(({className, type, text}) => {   // Массив который му будем перебирать с помощью МАР и возвращать кнопки!
+    const btns = params.map(({className, type, text}) => { // Массив который му будем перебирать с помощью МАР и возвращать кнопки!
       const button = document.createElement('button');
       button.type = type;
       button.textContent = text;
       button.className = className;
       return button;
-    })
-    btnWrapper.append(...btns)
+    });
+    btnWrapper.append(...btns);
 
     return {
       btnWrapper,
@@ -111,11 +110,11 @@ const data = [
 
     const tbody = document.createElement('tbody');
 
-    table.append(thead,tbody);
+    table.append(thead, tbody);
     table.tbody = tbody;
 
     return table;
-  }
+  };
 
   const createForm = () => {
     const overlay = document.createElement('div');
@@ -140,7 +139,7 @@ const data = [
        </div>
       `);
 
-    const buttonsGroup = createButtonsGroup([  //Парсим?
+    const buttonsGroup = createButtonsGroup([ // Парсим?
       {
         classList: 'btn btn-primary',
         type: 'submit',
@@ -165,11 +164,11 @@ const data = [
 
 
   const renderPhoneBook = (app, title) => {
-    const header = createHeader();  // И это переменная в которой вызвана функция!
+    const header = createHeader(); // И это переменная в которой вызвана функция!
     const logo = createLogo(title); // Вот как раз таки эта перемення в которой вызвана функция и тут же мы принимаем title
     const main = createMain();
     const footer = createFooter();
-    const buttonsGroup = createButtonsGroup([  //Парсим?
+    const buttonsGroup = createButtonsGroup([ // Парсим?
       {
         classList: 'btn btn-primary mr-3',
         type: 'button',
@@ -185,9 +184,9 @@ const data = [
     const table = createTable();
     const form = createForm();
 
-    header.headerContainer.append(logo) // Аппендим логотип в хедер!
+    header.headerContainer.append(logo); // Аппендим логотип в хедер!
     main.mainContainer.append(buttonsGroup.btnWrapper, table, form.overlay);
-    footer.footerContainer.append(author)
+    footer.footerContainer.append(author);
     app.append(header, main, footer); // аппендим на страницу хедер и мэйн!
 
     return {
@@ -196,32 +195,30 @@ const data = [
   };
 
   const createRow = ({name: firstName, surname, phone}) => {
+    const tr = document.createElement('tr');
 
+    const tdDell = document.createElement('td');
+    tdDell.classList.add('delete');
+    const buttonDell = document.createElement('button');
+    buttonDell.classList.add('del-icon');
+    tdDell.append(buttonDell);
 
-   const tr = document.createElement('tr');
+    const tdName = document.createElement('td');
+    tdName.textContent = firstName;
 
-   const tdDell = document.createElement('td');
-   tdDell.classList.add('delete');
-   const buttonDell = document.createElement('button');
-   buttonDell.classList.add('del-icon')
-   tdDell.append(buttonDell);
+    const tdSurname = document.createElement('td');
+    tdSurname.textContent = surname;
 
-   const tdName = document.createElement('td');
-   tdName.textContent = firstName;
+    const tdPhone = document.createElement('td');
+    const phoneLink = document.createElement('a');
+    phoneLink.href = `tel:${phone}`;
+    phoneLink.textContent = phone;
 
-   const tdSurname = document.createElement('td');
-   tdSurname.textContent = surname;
+    tdPhone.append(phoneLink);
 
-   const tdPhone = document.createElement('td');
-   const phoneLink = document.createElement('a');
-   phoneLink.href = `tel:${phone}`;
-   phoneLink.textContent = phone;
+    tr.append(tdDell, tdName, tdSurname, tdPhone);
 
-   tdPhone.append(phoneLink);
-
-   tr.append(tdDell, tdName, tdSurname, tdPhone)
-
-   return tr;
+    return tr;
   };
 
   const renderContacts = (elem, data) => {
@@ -230,14 +227,13 @@ const data = [
   };
 
 
-
   const init = (selectorApp, title) => {
     const app = document.querySelector(selectorApp);
     const phoneBook = renderPhoneBook(app, title);
     const {list} = phoneBook;
 
     renderContacts(list, data);
-  }
+  };
 
   window.phoneBookInit = init;
 }
