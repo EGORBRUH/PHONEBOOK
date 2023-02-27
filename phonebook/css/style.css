@@ -41,12 +41,12 @@ body {
 
 .edit-icon {
   margin-left: 50px;
-  display: inline-block;
+  display: block;
   width: 10px;
   height: 10px;
   border: none;
   background-color: transparent;
-  background-image: url("/phonebook/img/free-icon-edit-2550330.png");
+  background-image: url("/phonebook/img/edit.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: 0 0;
