@@ -33,7 +33,7 @@ body {
   height: 10px;
   border: none;
   background-color: transparent;
-  background-image: url("/phonebook/img/del.svg");
+  background-image: url("/phonebook/img/crossed.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -41,15 +41,11 @@ body {
 
 .edit-icon {
   margin-left: 50px;
-  display: block;
-  width: 10px;
-  height: 10px;
-  border: none;
-  background-color: transparent;
-  background-image: url("/phonebook/img/edit.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: 0 0;
+  display: inline-block;
+  font-size: 10px;
+  width: 100px;
+  height: 20px;
+  background: url("/phonebook/img/edit.png");
 
 }
 
@@ -130,7 +126,7 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url("/phonebook/img/del.svg");
+  background-image: url("/phonebook/img/crossed.png");
 }
 
 .del-icon:hover,

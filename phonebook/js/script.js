@@ -221,10 +221,10 @@ const data = [
     tdPhone.append(phoneLink);
     const editBtn = document.createElement('button');
     editBtn.classList.add('edit-icon');
-    phoneLink.append(editBtn);
+    tdPhone.append(editBtn)
 
     tr.append(tdDell, tdName, tdSurname, tdPhone);
-
+    editBtn.textContent = 'Редактировать'
     return tr;
   };
 
