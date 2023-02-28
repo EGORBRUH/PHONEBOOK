@@ -33,21 +33,25 @@ body {
   height: 10px;
   border: none;
   background-color: transparent;
-  background-image: url("/phonebook/img/crossed.png");
+  background-image: url("/img/crossed.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.edit-icon {
+.icon-edit {
   margin-left: 50px;
   display: inline-block;
-  font-size: 10px;
-  width: 100px;
-  height: 20px;
-  background: url("/phonebook/img/edit.png");
-
+  width: 20px;
+  height: 35px;
+  border: none;
+  background-color: transparent;
+  background-image: url("/img/free-icon-edit-8556167.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 0 15px;
 }
+
 
 .delete.is-visible {
   width: 10px;
@@ -126,7 +130,7 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url("/phonebook/img/crossed.png");
+  background-image: url("/img/crossed.png");
 }
 
 .del-icon:hover,

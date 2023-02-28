@@ -123,37 +123,42 @@ const data = [
     const form = document.createElement('form');
     form.classList.add('form');
     form.insertAdjacentHTML('beforeend', `
-        <button class="close" type="button"></button>
-        <h2 class="form-title">Добавить контакт</h2>
-       <div class="form-group">
-          <label class="form-label" for="name">Имя:</label>
-          <input class="form-input" name="name" id="name" type="text" required>
-       </div>
-        <div class="form-group">
-          <label class="form-label" for="surname">Фамилия:</label>
-          <input class="form-input" name="surname" id="surname" type="text" required>
-       </div>
-        <div class="form-group">
-          <label class="form-label" for="phone">Телефон:</label>
-          <input class="form-input" name="phone" id="phone" type="number" required>
-       </div>
-      `);
+      <button class="close" type="button"></button>
+      <h2 class="form-title">Добавить контакт</h2>
+      <div class="form-group">
+        <label class="form-label">
+            Имя
+          <input class="form-input" name="name" type="text" required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="form-label">
+            Фамилия
+          <input class="form-input" name="surname" type="text" required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="form-label">
+            Телефон
+          <input class="form-input" name="phone" type="number" required>
+        </label>
+      </div>
+    `);
 
-    const buttonsGroup = createButtonsGroup([ // Парсим?
+    const buttonGroup = createButtonsGroup([
       {
-        classList: 'btn btn-primary',
+        className: 'btn btn-primary mr-4',
         type: 'submit',
         text: 'Добавить',
       },
       {
-        classList: 'btn btn-danger',
+        className: 'btn btn-danger',
         type: 'reset',
         text: 'Отмена',
       },
     ]);
 
-    form.append(...buttonsGroup.btns);
-
+    form.append(...buttonGroup.btns);
     overlay.append(form);
 
     return {
@@ -162,37 +167,35 @@ const data = [
     };
   };
 
-
   const renderPhoneBook = (app, title) => {
-    const header = createHeader(); // И это переменная в которой вызвана функция!
-    const logo = createLogo(title); // Вот как раз таки эта перемення в которой вызвана функция и тут же мы принимаем title
+    const header = createHeader();
+    const logo = createLogo(title);
     const main = createMain();
-    const buttonsGroup = createButtonsGroup([ // Парсим?
+    const buttonGroup = createButtonsGroup([
       {
-        classList: 'btn btn-primary js-add',
+        className: 'btn btn-primary mr-4',
         type: 'button',
         text: 'Добавить',
       },
       {
-        classList: 'btn btn-danger',
+        className: 'btn btn-danger',
         type: 'button',
         text: 'Удалить',
       },
     ]);
-
     const table = createTable();
     const form = createForm();
     const footer = createFooter(title);
 
     header.headerContainer.append(logo); // Аппендим логотип в хедер!
-    main.mainContainer.append(buttonsGroup.btnWrapper, table, form.overlay);
+    main.mainContainer.append(buttonGroup.btnWrapper, table, form.overlay);
     footer.footerContainer.append(author);
     app.append(header, main, footer); // аппендим на страницу хедер, мэйн и футер!
 
     return {
       list: table.tbody,
       logo,
-      btnAdd: buttonsGroup.btns[0],
+      btnAdd: buttonGroup.btns[0],
       formOverlay: form.overlay,
       form: form.form,
     };
@@ -220,11 +223,11 @@ const data = [
     tr.phoneLink = phoneLink
     tdPhone.append(phoneLink);
     const editBtn = document.createElement('button');
-    editBtn.classList.add('edit-icon');
+    editBtn.classList.add('icon-edit');
     tdPhone.append(editBtn)
 
     tr.append(tdDell, tdName, tdSurname, tdPhone);
-    editBtn.textContent = 'Редактировать'
+
     return tr;
   };
 
@@ -249,7 +252,7 @@ const data = [
   const init = (selectorApp, title) => {
     const app = document.querySelector(selectorApp);
     const phoneBook = renderPhoneBook(app, title);
-    const {list, logo, btnAdd, formOverlay, form} = phoneBook;
+    const {list, logo, btnAdd, formOverlay, form, editBtn} = phoneBook;
 
     const allRow = renderContacts(list, data);
 
