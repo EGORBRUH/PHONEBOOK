@@ -44,7 +44,7 @@ const data = [
   const createLogo = title => { // Соответственно это функция которая создает элемент! Для дальнейшей работы которой мы создаем новую переменную в остновной функции!
     const h1 = document.createElement('h1'); // Создаем новый элемент!
     h1.classList.add('logo'); // Присваиваем этому элементу класс!
-    h1.textContent = `Телефонный справочник. ${title}`; // Добавляем классу текст!
+    h1.textContent = `Телефонный справочник ${title}`; // Добавляем классу текст!
 
     return h1;
   };
@@ -196,6 +196,7 @@ const data = [
       list: table.tbody,
       logo,
       btnAdd: buttonGroup.btns[0],
+      btnDel: buttonGroup.btns[1],
       formOverlay: form.overlay,
       form: form.form,
     };
@@ -203,6 +204,7 @@ const data = [
 
   const createRow = ({name: firstName, surname, phone}) => {
     const tr = document.createElement('tr');
+    tr.classList.add('contact');
 
     const tdDell = document.createElement('td');
     tdDell.classList.add('delete');
@@ -252,7 +254,14 @@ const data = [
   const init = (selectorApp, title) => {
     const app = document.querySelector(selectorApp);
     const phoneBook = renderPhoneBook(app, title);
-    const {list, logo, btnAdd, formOverlay, form, editBtn} = phoneBook;
+    const {
+      list,
+      logo,
+      btnAdd,
+      formOverlay,
+      form,
+      btnDel,
+    } = phoneBook;
 
     const allRow = renderContacts(list, data);
 
@@ -262,14 +271,25 @@ const data = [
       formOverlay.classList.add('is-visible');
     });
 
-    form.addEventListener('click', event => {
-      event.stopPropagation();
-    })
 
-    formOverlay.addEventListener('click', () => {
-      formOverlay.classList.remove('is-visible');
-    })
+    formOverlay.addEventListener('click', e => {
+      const target = e.target;
+      if (target === formOverlay || target.classList.contains('close')) {
+        formOverlay.classList.remove('is-visible');
+      }
+    });
 
+    btnDel.addEventListener('click', () => {
+      document.querySelectorAll('.delete').forEach(del => {
+        del.classList.toggle('is-visible')
+      });
+    });
+    list.addEventListener('click', e => {
+      const target = e.target;
+      if (e.target.closest('.del-icon')) {
+        e.target.closest('.contact').remove();
+      }
+    });
   };
 
   window.phoneBookInit = init;

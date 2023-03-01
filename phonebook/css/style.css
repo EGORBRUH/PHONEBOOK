@@ -29,14 +29,14 @@ body {
 
 .del-icon {
   display: block;
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 30px;
   border: none;
   background-color: transparent;
   background-image: url("/img/crossed.png");
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: 0 10px;
 }
 
 .icon-edit {
@@ -125,8 +125,8 @@ body {
   right: 20px;
   top: 20px;
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
