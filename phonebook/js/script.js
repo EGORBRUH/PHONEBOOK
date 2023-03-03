@@ -92,26 +92,27 @@ const data = [
     return {
       btnWrapper,
       btns,
-    };
+    }
   };
 
   const createTable = () => {
     const table = document.createElement('table');
     table.classList.add('table', 'table-striped');
     const thead = document.createElement('thead');
+    thead.classList.add('thead');
     thead.insertAdjacentHTML('beforeend', `
-      <tr>
+      <tr class="head">
         <th class="delete">Удалить</th>
-        <th>Имя</th>
-        <th>Фамилие</th>
+        <th class="name">Имя</th>
+        <th class="surname">Фамилие</th>
         <th>Телефон</th>
       </tr>
     `);
-
     const tbody = document.createElement('tbody');
 
     table.append(thead, tbody);
     table.tbody = tbody;
+    table.thead = thead;
 
     return table;
   };
@@ -194,6 +195,7 @@ const data = [
 
     return {
       list: table.tbody,
+      listSort: table.thead,
       logo,
       btnAdd: buttonGroup.btns[0],
       btnDel: buttonGroup.btns[1],
@@ -201,6 +203,7 @@ const data = [
       form: form.form,
     };
   };
+
 
   const createRow = ({name: firstName, surname, phone}) => {
     const tr = document.createElement('tr');
@@ -233,6 +236,7 @@ const data = [
     return tr;
   };
 
+
   const renderContacts = (elem, data) => {
     const allRow = data.map(createRow);
     elem.append(...allRow);
@@ -261,6 +265,9 @@ const data = [
       formOverlay,
       form,
       btnDel,
+      thead,
+      tr,
+      listSort,
     } = phoneBook;
 
     const allRow = renderContacts(list, data);
@@ -290,6 +297,24 @@ const data = [
         e.target.closest('.contact').remove();
       }
     });
+
+    let position;
+
+    const sortArea = (position) => {
+      return allRow.sort((x, y) => ((x.children[position].innerText
+        < y.children[position].innerText) ? - 1 : 1));
+    }
+
+    listSort.addEventListener('click', e => {
+      const target = e.target;
+      console.log(target)
+      const headTarget = listSort.children[0].children;
+      if (headTarget) {
+        position = [...headTarget].findIndex(elem => elem === target);
+        list.replaceChildren(...sortArea(position))
+      }
+    });
+
   };
 
   window.phoneBookInit = init;
