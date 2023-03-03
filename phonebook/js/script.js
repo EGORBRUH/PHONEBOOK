@@ -92,7 +92,7 @@ const data = [
     return {
       btnWrapper,
       btns,
-    }
+    };
   };
 
   const createTable = () => {
@@ -225,11 +225,11 @@ const data = [
     const phoneLink = document.createElement('a');
     phoneLink.href = `tel:${phone}`;
     phoneLink.textContent = phone;
-    tr.phoneLink = phoneLink
+    tr.phoneLink = phoneLink;
     tdPhone.append(phoneLink);
     const editBtn = document.createElement('button');
     editBtn.classList.add('icon-edit');
-    tdPhone.append(editBtn)
+    tdPhone.append(editBtn);
 
     tr.append(tdDell, tdName, tdSurname, tdPhone);
 
@@ -245,15 +245,15 @@ const data = [
 
   const hoverRow = (allRow, logo) => {
     const text = logo.textContent;
-  allRow.forEach(contact => {
-    contact.addEventListener('mouseenter', () =>  {
-      logo.textContent = contact.phoneLink.textContent;
+    allRow.forEach(contact => {
+      contact.addEventListener('mouseenter', () => {
+        logo.textContent = contact.phoneLink.textContent;
+      });
+      contact.addEventListener('mouseleave', () => {
+        logo.textContent = text;
+      });
     });
-    contact.addEventListener('mouseleave', () =>  {
-      logo.textContent = text;
-    });
-  });
-}
+  };
 
   const init = (selectorApp, title) => {
     const app = document.querySelector(selectorApp);
@@ -288,7 +288,7 @@ const data = [
 
     btnDel.addEventListener('click', () => {
       document.querySelectorAll('.delete').forEach(del => {
-        del.classList.toggle('is-visible')
+        del.classList.toggle('is-visible');
       });
     });
     list.addEventListener('click', e => {
@@ -300,21 +300,18 @@ const data = [
 
     let position;
 
-    const sortArea = (position) => {
-      return allRow.sort((x, y) => ((x.children[position].innerText
-        < y.children[position].innerText) ? - 1 : 1));
-    }
+    const sortArea = (position) => allRow.sort((x, y) => ((x.children[position].innerText <
+        y.children[position].innerText) ? -1 : 1));
 
     listSort.addEventListener('click', e => {
       const target = e.target;
-      console.log(target)
+      console.log(target);
       const headTarget = listSort.children[0].children;
       if (headTarget) {
         position = [...headTarget].findIndex(elem => elem === target);
-        list.replaceChildren(...sortArea(position))
+        list.replaceChildren(...sortArea(position));
       }
     });
-
   };
 
   window.phoneBookInit = init;
